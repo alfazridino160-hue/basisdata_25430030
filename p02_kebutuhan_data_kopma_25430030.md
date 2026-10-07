@@ -2,7 +2,7 @@
 
 ## 1. Latar belakang dan aktivitas organisasi
 
-kopma menjual berbagai alat tulis, makanan ringan, dan minuman di lungkungan kampus. pembelinya merupakan anggota ataupun orang umum. pekerja kasir yang pekerjaanya mencatat penjualan dan membuat nota, petugas gudang, dan ketua koperasi. pada saat wawancara:ketua: harga barang sering naik, jadi kami bingung saat melihat nota lama, petugas gudang: kadang di buku catatan stoknya malah minus ,kasir: anggota sering lupa membawa kartu, jadi kami mencarinya lewat NIM
+kopma menjual berbagai alat tulis, makanan ringan, dan minuman di lungkungan kampus. pembelinya merupakan anggota ataupun orang umum. pekerja kasir yang pekerjaanya mencatat penjualan dan membuat nota, petugas gudang, dan ketua koperasi. pada saat wawancara:ketua: harga barang sering naik, jadi kami bingung saat melihat nota lama, petugas gudang: kadang di buku catatan stoknya malah minus ,kasir: anggota sering lupa membawa kartu, jadi kami mencarinya lewat NIM.
 
 ## 2. Aktor dan proses bisnis
 

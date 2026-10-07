@@ -13,6 +13,9 @@ kopma menjual berbagai alat tulis, makanan ringan, dan minuman di lungkungan kam
 | PB-03 | Memesan barang ke pemasok | Petugas gudang | Stok di bawah batas minimum |
 | PB-04 | Menerima barang dari pemasok | Petugas gudang | Barang datang bersama faktur |
 | PB-05 | Menyusun laporan bulanan | Ketua koperasi | Awal bulan |
+| PB-06 | Mengelola data pemasok | Petugas gudang | Ada pemasok baru atau data pemasok berubah |
+| PB-07 | Mengelola status keanggotaan | Kasir | Anggota diaktifkan atau dinonaktifkan |
+| PB-08 | Menukar poin loyalitas | Kasir | Anggota ingin menukar 50 poin |
 
 ## 3. Dokumen sumber yang dianalisis
 
@@ -48,6 +51,8 @@ sumber dokumen pj-2609-0142
 | AB-04 | Harga jual pada nota disimpan per baris dan tidak berubah meski harga barang kemudian naik. |
 | AB-05 | NIM anggota unik; pencarian anggota dapat lewat nomor anggota atau NIM. |
 | AB-06 | Pesanan pembelian dibuat bila stok kurang dari batas minimum barang tersebut. |
+| AB-07 | Anggota aktif memperoleh 1 poin untuk setiap kelipatan Rp10.000 total belanja, dibulatkan ke bawah. |
+| AB-08 | 50 poin dapat ditukar potongan Rp5.000, dan saldo poin tidak boleh negatif. |
 
 ## 6. Kebutuhan informasi
 
@@ -57,18 +62,20 @@ sumber dokumen pj-2609-0142
 | KI-02 | Lima barang terlaris per bulan berdasarkan qty | Detail penjualan, barang |
 | KI-03 | Barang dengan stok di bawah batas minimum | Barang |
 | KI-04 | Sepuluh anggota dengan belanja terbesar per bulan | Penjualan, detail penjualan, anggota |
+| KI-05 | Saldo poin tiap anggota dan jumlah poin yang ditukar per bulan | Anggota, penjualan, penukaran poin |
 
 ## 7. Matriks CRUD
 
-| Proses | Anggota | Barang | Penjualan | Detail | Pemasok | Pembelian |
-|---|---|---|---|---|---|---|
-| PB-01 Daftar anggota | C | | | | | |
-| PB-02 Catat penjualan | R | R, U | C | C | | |
-| PB-03 Pesan ke pemasok | | R | | | R | C |
-| PB-04 Terima barang | | U | | | R | U |
-| PB-05 Laporan bulanan | R | R | R | R | | R |
-| PB-06 Kelola data pemasok | | | | | C, U | |
-| PB-07 Kelola status anggota | U | | | | | |
+| Proses | Anggota | Barang | Penjualan | Detail | Pemasok | Pembelian | Penukaran poin |
+|---|---|---|---|---|---|---|---|
+| PB-01 Daftar anggota | C | | | | | | |
+| PB-02 Catat penjualan | R, U | R, U | C | C | | | |
+| PB-03 Pesan ke pemasok | | R | | | R | C | |
+| PB-04 Terima barang | | U | | | R | U | |
+| PB-05 Laporan bulanan | R | R | R | R | | R | R |
+| PB-06 Kelola data pemasok | | | | | C, U | | |
+| PB-07 Kelola status anggota | U | | | | | | |
+| PB-08 Tukar poin | R, U | | R | | | | C |
 
 ## 8. Kamus data awal
 
@@ -84,15 +91,19 @@ sumber dokumen pj-2609-0142
 | stok_barang | Jumlah barang tersedia | 35 | Bilangan bulat ≥ 0 (AB-03) | Petugas gudang |
 | batas_minimum_stok | Batas stok untuk memesan ulang | 10 | Bilangan bulat ≥ 0 (AB-06) | Petugas gudang |
 | no_faktur_pembelian | Nomor faktur dari pemasok | FK-2609-0031 | Unik per faktur | Petugas gudang |
+| saldo_poin_anggota | Jumlah poin yang dimiliki anggota | 12 | Bilangan bulat ≥ 0 (AB-08) | Ketua |
+| poin_diperoleh_penjualan | Poin dari satu nota | 2 | Bilangan bulat ≥ 0 (AB-07) | Kasir |
+| poin_ditukar | Poin yang dipakai dalam satu penukaran | 50 | Kelipatan 50 (AB-08) | Kasir |
 
 ## 9. Kebutuhan non-fungsional data
 
 data nota yang tercatat sekitar 150 nota per hari, data transaksi minimal disimpan 5 tahun, dan untuk menajaga privasi nomor HP anggota hanya ketua saja yang boleh lihat. 
 
+### Pernyataan kebutuhan yang diperbaiki
+
+- (a) Nomor HP dan NIM anggota hanya dapat dilihat oleh ketua; kasir hanya dapat melihat nama dan nomor anggota.
+- (b) pencarian barang menampilkan hasil dalam beberapa detik untuk memunculkan beberapa barang
+- (c) seslisih laporan stok tidak boleh minus
+
 ## 10. Isu kualitas data yang diantisipasi
-
-Beberapa isu yang diantisipasi adalah sebagai berikut.
-
-- Stok barang bisa menjadi minus. Isu ini dicegah dengan AB-03: penjualan ditolak bila qty melebihi stok tersedia.
-- Harga di nota lama bisa berubah. Isu ini dicegah dengan AB-04: harga jual pada nota disimpan per baris dan tidak berubah meski harga barang kemudian naik.
-- NIM anggota bisa tercatat ganda. Isu ini dicegah dengan AB-05: NIM anggota harus unik.
+salah satu isu nya adalah, stok minus dengan penjualan ditolak bila qty melebihi stok tersedia, harga di nota lama berubah Harga jual pada nota disimpan per baris dan tidak berubah meski harga barang kemudian naik.

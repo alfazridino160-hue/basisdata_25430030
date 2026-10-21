@@ -156,3 +156,42 @@ Perbedaan utama dengan hasil normalisasi di atas: kunci primer memakai **kunci p
 Catatan: kunci pengganti tidak menghapus dependensi fungsional. Normalisasi tetap diperiksa dengan kunci alami, misalnya `nim_anggota` pada anggota.
 
 informasi pemasok di simpan pada nota pembelian dan detail_pembelian yang terhubung ke tabel pemasok.
+
+## 7. Latihan E
+
+### 7.1 Beberapa nomor telepon untuk setiap pemasok
+
+```text
+Sebelum (melanggar 1NF):
+PEMASOK (id_pemasok, nama_pemasok, telepon_pemasok, alamat_pemasok)
+  -> telepon_pemasok berisi lebih dari satu nomor dalam satu sel
+
+Sesudah:
+PEMASOK         (id_pemasok, nama_pemasok, alamat_pemasok)
+TELEPON_PEMASOK ([TULIS kolom dan kuncinya])
+```
+
+[TULIS 2-3 kalimat: aturan normal form yang dilanggar, alasan nomor dipindah ke tabel sendiri, dan alasan pilihan kuncimu.]
+
+### 7.2 Contoh pelanggaran 3NF dan anomali ubah
+
+Rantai yang melanggar 3NF: (no_nota_penjualan, tgl_penjualan, no_anggota, nama_anggota)
+
+Contoh data:
+
+```text
+penjualan_buruk (no_nota_penjualan, tgl_penjualan, no_anggota, nama_anggota)
+
+
+PJ-0001 | 2026-09-24 | K03 | Rina
+PJ-0002 | 2026-09-24 | K03 | Rina
+PJ-0003 | 2026-09-25 | K03 | Rina
+```
+
+Kueri ubah:
+
+```sql
+UPDATE penjualan_buruk
+SET nama_petugas = 'Rina Putri'
+WHERE no_nota_penjualan = 'PJ-0001';
+```
